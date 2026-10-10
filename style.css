@@ -1786,39 +1786,12 @@ svg {
   }
 }
 
-/* =========================================
-   DESKTOP — SPACE BELOW FOLDERS
-========================================= */
+
+/* DESKTOP — FINAL DESIGNER SIZE */
 
 @media (min-width: 1200px) {
-
-  /* Move software icons slightly lower */
-  .software-strip {
-    bottom: 10px !important;
-  }
-
-  /* Keep laptop and folders above the icons */
-  .hero-stage {
-    top: 56% !important;
-
-    width: min(
-      76vw,
-      1100px,
-      calc((100svh - 260px) * 1.58)
-    ) !important;
-  }
-
-  /* Title above MacBook */
-  .designer-title {
+  main.hero h1.designer-title {
+    font-size: 11vw !important;
     top: 0 !important;
-    font-size: min(13vw, 210px) !important;
-    line-height: 0.9 !important;
-    transform: none !important;
-  }
-
-}
-@media (min-width: 1200px) {
-  .designer-title {
-    font-size: 10.5vw !important;
   }
 }
