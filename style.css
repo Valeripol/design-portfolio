@@ -1,0 +1,1767 @@
+
+/* =========================================
+   VALERYIA KLUSHYNA
+   PORTFOLIO — HOME PAGE
+========================================= */
+
+/* 1. GLOBAL */
+
+:root {
+  --background: #CBE2F9;
+  --black: #050505;
+  --neon: #16C9FF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--black);
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  border: 0;
+  background: transparent;
+}
+
+img,
+video,
+svg {
+  display: block;
+}
+
+/* =========================================
+   2. HEADER
+========================================= */
+
+.header {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  min-height: 53px;
+  padding: 14px 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+
+  background: var(--background);
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navigation a {
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.navigation a:hover {
+  opacity: 0.55;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* =========================================
+   3. HERO
+========================================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: calc(100svh - 53px);
+  min-height: 550px;
+
+  background: var(--background);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* =========================================
+   4. DESIGNER TITLE
+========================================= */
+
+.designer-title {
+  position: absolute;
+  z-index: 10;
+
+  top: -18px;
+  left: 0;
+
+  width: 100%;
+  margin: 0;
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Archivo Black", sans-serif;
+  font-size: min(16.1vw, 285px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.095em;
+
+  color: #000000;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* LETTER APPEARANCE */
+
+.designer-title .letter {
+  position: relative;
+  display: inline-block;
+
+  opacity: 0;
+
+  animation: designerLetter 0.85s
+    cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  animation-delay: calc(var(--i) * 0.12s);
+}
+
+@keyframes designerLetter {
+  from {
+    opacity: 0;
+    transform: translateY(65px) rotate(4deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+/* BLUE LIGHT SWEEP */
+
+.designer-title .letter::after {
+  content: attr(data-char);
+
+  position: absolute;
+  inset: 0;
+
+  color: transparent;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #008CFF 42%,
+    #00D5FF 48%,
+    #FFFFFF 51%,
+    #00BFFF 57%,
+    transparent 70%
+  );
+
+  background-size: 450% 100%;
+  background-position: 100% 0;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  pointer-events: none;
+
+  animation: designerSweep 0.75s ease-in-out both;
+  animation-delay: calc(1.15s + var(--i) * 0.11s);
+}
+
+@keyframes designerSweep {
+  0% {
+    background-position: 100% 0;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 12px #00BFFF);
+  }
+
+  100% {
+    background-position: 0% 0;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* =========================================
+   5. MACBOOK VIDEO
+========================================= */
+
+.hero-stage {
+  position: absolute;
+  z-index: 3;
+
+  left: 50%;
+  top: 55.2%;
+
+  transform: translate(-50%, -50%);
+
+  width: min(
+    82vw,
+    1180px,
+    calc((100svh - 220px) * 1.58)
+  );
+
+  aspect-ratio: 1.58;
+  margin: 0;
+}
+
+.laptop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.laptop video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* =========================================
+   6. FOLDER CONTAINER
+========================================= */
+
+.folders {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.folder {
+  position: absolute;
+
+  display: block;
+  width: 37%;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform:
+    translate3d(var(--start-x), var(--start-y), 0)
+    scale(0.18)
+    rotate(-12deg);
+
+  will-change: transform, opacity;
+}
+
+.folder img {
+  width: 100%;
+  height: auto;
+
+  filter: drop-shadow(
+    0 12px 14px rgba(0, 0, 0, 0.14)
+  );
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.folder:hover img {
+  transform: translateY(-12px) scale(1.07);
+
+  filter: drop-shadow(
+    0 22px 20px rgba(0, 0, 0, 0.23)
+  );
+}
+
+.folder:focus-visible {
+  outline: 3px solid #050505;
+  outline-offset: 5px;
+}
+
+/* =========================================
+   7. FOLDER POSITIONS
+========================================= */
+
+/* PINK — LOGO DESIGN */
+
+.folder-logo {
+  left: -11%;
+  top: 54%;
+
+  --start-x: 170%;
+  --start-y: -20%;
+  --rotation: -9deg;
+
+  z-index: 4;
+}
+
+/* GREEN — BRANDING */
+
+.folder-branding {
+  left: 7.5%;
+  top: 10%;
+
+  --start-x: 60%;
+  --start-y: 125%;
+  --rotation: 6deg;
+
+  z-index: 3;
+}
+
+/* ORANGE — PACKAGING */
+
+.folder-packaging {
+  right: -11%;
+  top: 16%;
+
+  --start-x: -160%;
+  --start-y: 90%;
+  --rotation: 7deg;
+
+  z-index: 5;
+}
+
+/* BEIGE — PRINT */
+
+.folder-print {
+  right: -1%;
+  bottom: -1%;
+
+  --start-x: -75%;
+  --start-y: -120%;
+  --rotation: -6deg;
+
+  z-index: 6;
+}
+
+/* =========================================
+   8. FOLDER FLY ANIMATION
+========================================= */
+
+.folder.fly {
+  visibility: visible;
+  pointer-events: auto;
+
+  animation: folderFly 1.25s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+@keyframes folderFly {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate3d(
+        var(--start-x),
+        var(--start-y),
+        0
+      )
+      scale(0.18)
+      rotate(-15deg);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+
+    transform:
+      translate3d(0, -15px, 0)
+      scale(1.06)
+      rotate(var(--rotation));
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translate3d(0, 0, 0)
+      scale(1)
+      rotate(0deg);
+  }
+}
+
+/* =========================================
+   9. NEON DECORATIVE STARS
+========================================= */
+
+.neon-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-star {
+  display: none;
+}
+
+.neon-star {
+  position: absolute;
+
+  font-family: Arial, sans-serif;
+  font-size: 34px;
+  line-height: 1;
+
+  color: #35D4FF;
+
+  text-shadow:
+    0 0 5px rgba(255, 255, 255, 1),
+    0 0 12px rgba(0, 191, 255, 0.85),
+    0 0 26px rgba(0, 191, 255, 0.55);
+
+  animation:
+    neonFloatActive 4.4s ease-in-out infinite,
+    neonPulse 2.2s ease-in-out infinite;
+}
+
+.ns-1 {
+  top: 29%;
+  left: 4%;
+  font-size: 38px;
+  animation-delay: 0s;
+}
+
+.ns-2 {
+  top: 47%;
+  right: 4%;
+  font-size: 42px;
+  animation-delay: -1.2s;
+}
+
+.ns-3 {
+  bottom: 26%;
+  left: 7%;
+  font-size: 27px;
+  animation-delay: -2.1s;
+}
+
+.ns-4 {
+  bottom: 21%;
+  right: 6%;
+  font-size: 30px;
+  animation-delay: -3s;
+}
+
+.ns-5 {
+  top: 35%;
+  left: 11%;
+  font-size: 24px;
+  animation-delay: -0.6s;
+}
+
+.ns-6 {
+  top: 65%;
+  right: 11%;
+  font-size: 24px;
+  animation-delay: -2.6s;
+}
+
+.ns-7 {
+  top: 61%;
+  left: 2.5%;
+  font-size: 20px;
+  animation-delay: -3.7s;
+}
+
+.ns-8 {
+  top: 27%;
+  right: 10%;
+  font-size: 22px;
+  animation-delay: -1.8s;
+}
+
+@keyframes neonFloatActive {
+  0%, 100% {
+    transform:
+      translateY(0)
+      rotate(0deg)
+      scale(0.92);
+  }
+
+  25% {
+    transform:
+      translateY(-8px)
+      rotate(8deg)
+      scale(1.04);
+  }
+
+  50% {
+    transform:
+      translateY(-15px)
+      rotate(-6deg)
+      scale(1.12);
+  }
+
+  75% {
+    transform:
+      translateY(-7px)
+      rotate(7deg)
+      scale(1.02);
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 0.65;
+    filter: brightness(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.35);
+  }
+}
+
+/* =========================================
+   10. SOFTWARE ICONS
+========================================= */
+
+.software-strip {
+  position: absolute;
+  z-index: 20;
+
+  right: 25px;
+  bottom: 16px;
+
+  width: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 12px;
+
+  margin: 0;
+  padding: 0;
+}
+
+.software-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border-radius: 13px;
+
+  cursor: default;
+
+  box-shadow:
+    0 7px 16px rgba(0, 0, 0, 0.13);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.software-icon:hover {
+  transform: translateY(-8px) scale(1.08);
+
+  box-shadow:
+    0 14px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* ILLUSTRATOR */
+
+.software-icon.ai {
+  background: #330000;
+  border: 2px solid #FF9A00;
+  color: #FF9A00;
+}
+
+/* PHOTOSHOP */
+
+.software-icon.ps {
+  background: #001E36;
+  border: 2px solid #31A8FF;
+  color: #31A8FF;
+}
+
+/* INDESIGN */
+
+.software-icon.id {
+  background: #49021F;
+  border: 2px solid #FF3366;
+  color: #FF3366;
+}
+
+.software-icon.adobe span {
+  font-family: Arial, sans-serif;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -2px;
+}
+
+/* FIGMA */
+
+.software-icon.figma {
+  background: #FFFFFF;
+}
+
+.software-icon.figma svg {
+  width: 30px;
+  height: 40px;
+}
+
+/* CANVA */
+
+.software-icon.canva {
+  background: linear-gradient(
+    135deg,
+    #00C4CC,
+    #34A7D1 45%,
+    #7D2AE8
+  );
+
+  color: #FFFFFF;
+}
+
+.software-icon.canva span {
+  font-family: Georgia, serif;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* =========================================
+   11. HIDDEN OLD ELEMENTS
+========================================= */
+
+.watermark-cover,
+.sound-toggle,
+.bottom-words {
+  display: none;
+}
+
+/* =========================================
+   12. MEDIUM DESKTOP / TABLET
+========================================= */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+  .header {
+    padding: 14px 20px;
+  }
+
+  .brand-name {
+    font-size: 12px;
+  }
+
+  .navigation {
+    gap: 12px;
+  }
+
+  .navigation a {
+    font-size: 10px;
+  }
+
+  .designer-title {
+    font-size: 15.8vw;
+  }
+
+  .hero-stage {
+    width: min(
+      92vw,
+      calc((100svh - 205px) * 1.58)
+    );
+  }
+
+  .folder {
+    width: 36%;
+  }
+
+  .software-icon {
+    width: 49px;
+    height: 49px;
+  }
+
+  .software-icon.adobe span {
+    font-size: 28px;
+  }
+
+  .software-icon.figma svg {
+    width: 27px;
+    height: 36px;
+  }
+
+  .software-icon.canva span {
+    font-size: 36px;
+  }
+}
+
+/* =========================================
+   13. MOBILE MENU
+========================================= */
+
+@media (max-width: 767px) {
+
+  .header {
+    min-height: 62px;
+    padding: 14px 16px;
+  }
+
+  .brand-name {
+    font-size: 11px;
+    max-width: 76%;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    width: 38px;
+    height: 36px;
+
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 27px;
+    height: 2px;
+    background: #050505;
+  }
+
+  .navigation {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+
+    padding: 25px 18px 30px;
+    background: var(--background);
+
+    box-shadow: 0 15px 25px rgba(0,0,0,0.06);
+  }
+
+  .navigation.open {
+    display: flex;
+  }
+
+  .navigation a {
+    font-size: 16px;
+  }
+
+  /* MOBILE HERO */
+
+  .hero {
+    height: auto;
+    min-height: calc(100svh - 62px);
+    padding: 8px 0 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+  }
+
+  /* MOBILE DESIGNER */
+
+  .designer-title {
+    position: relative;
+    top: auto;
+    left: auto;
+
+    width: 100%;
+    padding: 0 5px;
+
+    font-size: 15.8vw;
+    line-height: 1;
+
+    flex-shrink: 0;
+  }
+
+  .designer-title .letter {
+    animation-delay: calc(var(--i) * 0.1s);
+  }
+
+  /* MOBILE MACBOOK */
+
+  .hero-stage {
+    position: relative;
+
+    left: 50%;
+    top: auto;
+
+    width: 122vw;
+    max-width: none;
+
+    margin: 25px 0 0;
+
+    transform: translateX(-50%);
+    flex-shrink: 0;
+  }
+
+  /* MOBILE FOLDERS */
+
+  .folder {
+    width: 34%;
+  }
+
+  .folder-logo {
+    left: 7%;
+    top: 49%;
+  }
+
+  .folder-branding {
+    left: 21%;
+    top: 8%;
+  }
+
+  .folder-packaging {
+    right: 6%;
+    top: 13%;
+  }
+
+  .folder-print {
+    right: 13%;
+    bottom: 0%;
+  }
+
+  /* MOBILE SOFTWARE ICONS */
+
+  .software-strip {
+    position: relative;
+
+    right: auto;
+    bottom: auto;
+
+    width: 100%;
+    margin: 24px auto 0;
+    padding: 0 12px;
+
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .software-icon {
+    width: clamp(42px, 12vw, 54px);
+    height: clamp(42px, 12vw, 54px);
+    border-radius: 12px;
+  }
+
+  .software-icon.adobe span {
+    font-size: 28px;
+  }
+
+  .software-icon.figma svg {
+    width: 29px;
+    height: 38px;
+  }
+
+  .software-icon.canva span {
+    font-size: 36px;
+  }
+
+  /* MOBILE STARS */
+
+  .neon-star {
+    font-size: 22px;
+  }
+
+  .ns-1 {
+    top: 18%;
+    left: 3%;
+  }
+
+  .ns-2 {
+    top: 37%;
+    right: 3%;
+  }
+
+  .ns-3 {
+    bottom: 25%;
+    left: 4%;
+  }
+
+  .ns-4 {
+    bottom: 32%;
+    right: 4%;
+  }
+
+  .ns-5,
+  .ns-6,
+  .ns-7,
+  .ns-8 {
+    display: none;
+  }
+}
+
+/* =========================================
+   14. SHORT DESKTOP SCREENS
+========================================= */
+
+@media (min-width: 768px) and (max-height: 700px) {
+
+  .designer-title {
+    font-size: min(15.5vw, 26svh);
+  }
+
+  .hero-stage {
+    top: 53%;
+
+    width: min(
+      79vw,
+      calc((100svh - 165px) * 1.58)
+    );
+  }
+
+  .software-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .software-icon.adobe span {
+    font-size: 26px;
+  }
+
+  .software-icon.figma svg {
+    width: 25px;
+    height: 34px;
+  }
+
+  .software-icon.canva span {
+    font-size: 33px;
+  }
+
+  .software-strip {
+    bottom: 10px;
+  }
+}
+
+/* =========================================
+   15. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .designer-title .letter {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .designer-title .letter::after {
+    display: none;
+  }
+
+  .folder.fly {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .neon-star {
+    opacity: 0.75;
+    animation: none;
+  }
+
+  .folder img,
+  .software-icon {
+    transition: none;
+  }
+}
+
+/* =========================================
+   FINAL MOBILE FIX
+   HOME PAGE — RESPONSIVE COMPOSITION
+========================================= */
+
+@media (max-width: 767px) {
+
+  /* 1. REMOVE EXTRA EMPTY SPACE */
+
+  .hero {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    padding: 12px 0 24px;
+    margin: 0;
+
+    overflow: hidden;
+  }
+
+  /* 2. DESIGNER TITLE */
+
+  .designer-title {
+    position: relative;
+
+    top: auto;
+    left: auto;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 0 5px;
+
+    font-size: 15.8vw;
+    line-height: 1;
+
+    letter-spacing: -0.095em;
+    white-space: nowrap;
+
+    flex-shrink: 0;
+    z-index: 10;
+  }
+
+  /* 3. CENTER ENTIRE MACBOOK COMPOSITION */
+
+  .hero-stage {
+    position: relative;
+
+    left: 50%;
+    top: auto;
+    right: auto;
+    bottom: auto;
+
+    width: 108vw;
+    max-width: none;
+    height: auto;
+
+    aspect-ratio: 1.58;
+
+    margin: 12px 0 0;
+    padding: 0;
+
+    transform: translateX(-50%);
+
+    flex-shrink: 0;
+    z-index: 3;
+  }
+
+  /* 4. KEEP VIDEO INSIDE THE COMPOSITION */
+
+  .laptop {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  .laptop video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+  /* 5. FOLDERS KEEP THEIR PROPORTIONS */
+
+  .folders {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+  }
+
+  .folder {
+    width: 36.5%;
+    max-width: none;
+  }
+
+  .folder img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* PINK — LOGO DESIGN */
+
+  .folder-logo {
+    left: 4%;
+    right: auto;
+    top: 49%;
+    bottom: auto;
+  }
+
+  /* GREEN — BRANDING */
+
+  .folder-branding {
+    left: 17%;
+    right: auto;
+    top: 8%;
+    bottom: auto;
+  }
+
+  /* ORANGE — PACKAGING */
+
+  .folder-packaging {
+    left: auto;
+    right: 4%;
+    top: 13%;
+    bottom: auto;
+  }
+
+  /* BEIGE — PRINT */
+
+  .folder-print {
+    left: auto;
+    right: 10%;
+    top: auto;
+    bottom: 0%;
+  }
+
+  /* 6. SOFTWARE ICONS UNDER THE COMPOSITION */
+
+  .software-strip {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 8px auto 0;
+    padding: 0 10px;
+
+    gap: clamp(6px, 2vw, 12px);
+
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    z-index: 20;
+  }
+
+  .software-icon {
+    width: clamp(40px, 11.5vw, 54px);
+    height: clamp(40px, 11.5vw, 54px);
+
+    flex-shrink: 0;
+    border-radius: 11px;
+  }
+
+  .software-icon.adobe span {
+    font-size: clamp(23px, 7vw, 30px);
+  }
+
+  .software-icon.figma svg {
+    width: 55%;
+    height: 75%;
+  }
+
+  .software-icon.canva span {
+    font-size: clamp(29px, 8vw, 38px);
+  }
+
+  /* 7. KEEP STARS VISIBLE */
+
+  .neon-decor {
+    position: absolute;
+    inset: 0;
+
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .neon-star {
+    font-size: 24px;
+  }
+
+  .ns-1 {
+    top: 25%;
+    left: 3%;
+  }
+
+  .ns-2 {
+    top: 43%;
+    right: 3%;
+  }
+
+  .ns-3 {
+    bottom: 13%;
+    left: 4%;
+  }
+
+  .ns-4 {
+    bottom: 10%;
+    right: 4%;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 390px) {
+
+  .hero-stage {
+    width: 106vw;
+    margin-top: 10px;
+  }
+
+  .folder {
+    width: 36%;
+  }
+
+  .folder-logo {
+    left: 4%;
+  }
+
+  .folder-branding {
+    left: 16%;
+  }
+
+  .folder-packaging {
+    right: 4%;
+  }
+
+  .folder-print {
+    right: 9%;
+  }
+
+  .software-strip {
+    margin-top: 6px;
+    gap: 7px;
+  }
+
+  .hero {
+    padding-bottom: 18px;
+  }
+}
+
+/* =========================================
+   LANDSCAPE PHONES
+========================================= */
+
+@media (max-width: 767px) and
+       (orientation: landscape) {
+
+  .hero-stage {
+    width: min(95vw, 750px);
+  }
+
+  .designer-title {
+    font-size: 13vw;
+  }
+
+  .hero {
+    padding-bottom: 25px;
+  }
+}
+
+/* =========================================
+   REMOVE EMPTY SPACE — MOBILE HOME
+========================================= */
+
+@media (max-width: 767px) {
+
+  html,
+  body {
+    min-height: 0;
+  }
+
+  .hero {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    padding-bottom: 25px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .software-strip {
+    margin-bottom: 0 !important;
+  }
+
+}
+
+/* =========================================
+   MOBILE HOME — COMPACT HEIGHT FIX
+========================================= */
+
+@media (max-width: 767px) {
+
+  /* MAIN PAGE */
+
+  main.hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    padding-top: 12px !important;
+    padding-bottom: 20px !important;
+  }
+
+  /* DESIGNER TITLE */
+
+  main.hero .designer-title {
+    flex: 0 0 auto;
+  }
+
+  /* MACBOOK AND FOLDERS */
+
+  main.hero .hero-stage {
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 108vw;
+    height: auto;
+
+    aspect-ratio: 1.58;
+
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+
+  /* SOFTWARE ICONS */
+
+  main.hero .software-strip {
+    position: relative;
+
+    flex: 0 0 auto;
+
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* AVOID UNNECESSARY PAGE HEIGHT */
+
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+}
+
+/* =========================================
+   MOBILE — REMOVE BLUE EMPTY BACKGROUND
+========================================= */
+
+@media (max-width: 767px) {
+
+  html {
+    min-height: 0 !important;
+    background: #F2F2F2 !important;
+  }
+
+  body {
+    min-height: 0 !important;
+    height: auto !important;
+    background: #F2F2F2 !important;
+  }
+
+  .header,
+  main.hero {
+    background: #CFE3F5;
+  }
+
+  main.hero {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-bottom: 20px !important;
+  }
+}
+/* =========================================
+   EXTRA MOBILE STARS FOR EMPTY LOWER SPACE
+========================================= */
+
+.mobile-star {
+  opacity: 0;
+}
+
+@media (max-width: 767px) {
+
+  .neon-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .neon-star {
+    position: absolute;
+    display: block;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* existing stars become a little brighter on mobile */
+  .ns-1, .ns-2, .ns-3, .ns-4,
+  .ns-5, .ns-6, .ns-7, .ns-8 {
+    opacity: 0.9;
+    animation: mobileStarTwinkle 3.6s ease-in-out infinite;
+  }
+
+  /* additional bottom stars */
+  .mobile-star {
+    opacity: 0.85;
+    animation: mobileStarTwinkle 3.8s ease-in-out infinite;
+  }
+
+  .mbs-1 {
+    left: 8%;
+    top: 70%;
+    font-size: 24px;
+    color: #76e7ff;
+    text-shadow: 0 0 10px rgba(118, 231, 255, 0.75);
+    animation-delay: 0s;
+  }
+
+  .mbs-2 {
+    left: 22%;
+    top: 76%;
+    font-size: 18px;
+    color: #d6ff00;
+    text-shadow: 0 0 10px rgba(214, 255, 0, 0.7);
+    animation-delay: 0.4s;
+  }
+
+  .mbs-3 {
+    left: 39%;
+    top: 73%;
+    font-size: 26px;
+    color: #ff4db8;
+    text-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
+    animation-delay: 0.8s;
+  }
+
+  .mbs-4 {
+    left: 57%;
+    top: 79%;
+    font-size: 17px;
+    color: #76e7ff;
+    text-shadow: 0 0 10px rgba(118, 231, 255, 0.75);
+    animation-delay: 1.2s;
+  }
+
+  .mbs-5 {
+    left: 76%;
+    top: 72%;
+    font-size: 28px;
+    color: #d6ff00;
+    text-shadow: 0 0 12px rgba(214, 255, 0, 0.7);
+    animation-delay: 1.6s;
+  }
+
+  .mbs-6 {
+    left: 88%;
+    top: 81%;
+    font-size: 20px;
+    color: #ffb347;
+    text-shadow: 0 0 10px rgba(255, 179, 71, 0.75);
+    animation-delay: 2s;
+  }
+
+  .mbs-7 {
+    left: 12%;
+    top: 87%;
+    font-size: 30px;
+    color: #76e7ff;
+    text-shadow: 0 0 14px rgba(118, 231, 255, 0.75);
+    animation-delay: 0.6s;
+  }
+
+  .mbs-8 {
+    left: 30%;
+    top: 92%;
+    font-size: 19px;
+    color: #ff4db8;
+    text-shadow: 0 0 10px rgba(255, 77, 184, 0.7);
+    animation-delay: 1s;
+  }
+
+  .mbs-9 {
+    left: 48%;
+    top: 89%;
+    font-size: 24px;
+    color: #d6ff00;
+    text-shadow: 0 0 12px rgba(214, 255, 0, 0.7);
+    animation-delay: 1.4s;
+  }
+
+  .mbs-10 {
+    left: 66%;
+    top: 94%;
+    font-size: 16px;
+    color: #76e7ff;
+    text-shadow: 0 0 10px rgba(118, 231, 255, 0.75);
+    animation-delay: 1.8s;
+  }
+
+  .mbs-11 {
+    left: 83%;
+    top: 88%;
+    font-size: 27px;
+    color: #ffb347;
+    text-shadow: 0 0 12px rgba(255, 179, 71, 0.75);
+    animation-delay: 2.2s;
+  }
+
+  .mbs-12 {
+    left: 60%;
+    top: 84%;
+    font-size: 21px;
+    color: #ff4db8;
+    text-shadow: 0 0 11px rgba(255, 77, 184, 0.7);
+    animation-delay: 2.6s;
+  }
+
+  @keyframes mobileStarTwinkle {
+    0% {
+      opacity: 0.15;
+      transform: scale(0.7) translateY(0px) rotate(0deg);
+    }
+    25% {
+      opacity: 1;
+      transform: scale(1.08) translateY(-3px) rotate(4deg);
+    }
+    50% {
+      opacity: 0.45;
+      transform: scale(0.85) translateY(1px) rotate(-3deg);
+    }
+    75% {
+      opacity: 0.95;
+      transform: scale(1.12) translateY(-2px) rotate(2deg);
+    }
+    100% {
+      opacity: 0.15;
+      transform: scale(0.72) translateY(0px) rotate(0deg);
+    }
+  }
+
+}
+
+/* EXTRA STARS — MOBILE HOME ONLY */
+
+@media (min-width: 768px) {
+  .mobile-star {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-star {
+    animation: none !important;
+  }
+}
+
+/* =========================================
+   MOBILE HOME — BLUE FULL SCREEN
+   STARS BELOW SOFTWARE ICONS
+========================================= */
+
+@media (max-width: 767px) {
+
+  /* BLUE BACKGROUND TO BOTTOM OF SCREEN */
+
+  html,
+  body {
+    background: #CFE3F5 !important;
+    min-height: 100% !important;
+  }
+
+  body {
+    min-height: 100svh !important;
+  }
+
+  .header {
+    background: #CFE3F5 !important;
+  }
+
+  main.hero {
+    position: relative !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    min-height: calc(100svh - 62px) !important;
+    height: auto !important;
+    max-height: none !important;
+
+    padding-bottom: 30px !important;
+    background: #CFE3F5 !important;
+
+    overflow: hidden;
+  }
+
+  /* KEEP ORIGINAL CONTENT AT THE TOP */
+
+  main.hero .designer-title,
+  main.hero .hero-stage,
+  main.hero .software-strip {
+    flex-shrink: 0;
+  }
+
+  /* STARS COVER THE ENTIRE HERO HEIGHT */
+
+  main.hero .neon-decor {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100%;
+    height: 100% !important;
+
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* NEW STARS ONLY IN LOWER PART */
+
+  main.hero .mobile-star {
+    display: block !important;
+    position: absolute;
+
+    opacity: 0;
+
+    animation: lowerStarGlow 3.7s ease-in-out infinite !important;
+  }
+
+  .mbs-1  { left: 9%;  top: 64%; font-size: 27px; animation-delay: -0.2s !important; }
+  .mbs-2  { left: 28%; top: 69%; font-size: 17px; animation-delay: -1.4s !important; }
+  .mbs-3  { left: 48%; top: 65%; font-size: 34px; animation-delay: -2.3s !important; }
+  .mbs-4  { left: 76%; top: 70%; font-size: 22px; animation-delay: -0.9s !important; }
+  .mbs-5  { left: 87%; top: 62%; font-size: 31px; animation-delay: -2.7s !important; }
+  .mbs-6  { left: 15%; top: 78%; font-size: 21px; animation-delay: -1.8s !important; }
+  .mbs-7  { left: 37%; top: 82%; font-size: 37px; animation-delay: -0.5s !important; }
+  .mbs-8  { left: 65%; top: 78%; font-size: 19px; animation-delay: -2.1s !important; }
+  .mbs-9  { left: 88%; top: 87%; font-size: 28px; animation-delay: -1.1s !important; }
+  .mbs-10 { left: 10%; top: 92%; font-size: 16px; animation-delay: -3.1s !important; }
+  .mbs-11 { left: 52%; top: 93%; font-size: 29px; animation-delay: -1.6s !important; }
+  .mbs-12 { left: 75%; top: 95%; font-size: 19px; animation-delay: -2.6s !important; }
+
+  @keyframes lowerStarGlow {
+    0%, 100% {
+      opacity: 0.12;
+      transform: translateY(5px) scale(0.65) rotate(-12deg);
+      filter: brightness(1);
+    }
+
+    45% {
+      opacity: 1;
+      transform: translateY(-8px) scale(1.25) rotate(12deg);
+      filter: brightness(1.35);
+    }
+
+    70% {
+      opacity: 0.38;
+      transform: translateY(-2px) scale(0.9) rotate(0deg);
+    }
+  }
+
+}
+
+/* HIDE EXTRA STARS ON TABLETS AND DESKTOP */
+
+@media (min-width: 768px) {
+  .mobile-star {
+    display: none !important;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-star {
+    animation: none !important;
+    opacity: 0.7 !important;
+  }
+}
+
+/* =========================================
+   DESIGNER — BLUE NEON OUTLINE
+========================================= */
+
+.designer-title {
+  -webkit-text-stroke: 1.2px #19BFFF;
+
+  filter:
+    drop-shadow(0 0 3px rgba(0, 191, 255, 0.45))
+    drop-shadow(0 0 8px rgba(0, 191, 255, 0.22));
+}
+
+/* =========================================
+   BLUE NEON TITLE OUTLINE
+========================================= */
+
+.title-letter {
+  -webkit-text-stroke: 1.2px #19BFFF;
+
+  filter:
+    drop-shadow(0 0 3px rgba(0, 191, 255, 0.45))
+    drop-shadow(0 0 8px rgba(0, 191, 255, 0.22));
+}

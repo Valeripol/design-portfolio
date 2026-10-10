@@ -1,0 +1,906 @@
+
+/* =========================================
+   EDITORIAL & PRINT
+   VALERYIA KLUSHYNA
+========================================= */
+
+:root {
+  --blue: #CBE2F9;
+  --background: #F2F2F2;
+  --black: #050505;
+  --electric: #00BFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  background: var(--background);
+  color: var(--black);
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  min-height: 56px;
+  padding: 14px 24px;
+
+  background: var(--blue);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.site-brand {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.site-nav a {
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.site-nav a:hover {
+  opacity: 0.55;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.print-hero {
+  position: relative;
+
+  width: min(1510px, 94%);
+  min-height: 405px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 44% 56%;
+  align-items: center;
+
+  padding: 3px 0 30px;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+
+  align-self: start;
+  padding-left: 2%;
+}
+
+.print-title {
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(86px, 11vw, 190px);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.085em;
+  white-space: nowrap;
+}
+
+/* LETTER ANIMATION */
+
+.title-letter {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+
+  animation: letterRise 0.75s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+
+  animation-delay: calc(var(--i) * 0.12s);
+}
+
+.title-letter::after {
+  content: attr(data-char);
+
+  position: absolute;
+  inset: 0;
+
+  color: transparent;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #008CFF 38%,
+    #00D5FF 48%,
+    #FFFFFF 52%,
+    #00BFFF 61%,
+    transparent 72%
+  );
+
+  background-size: 450% 100%;
+  background-position: 100% 0;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  pointer-events: none;
+
+  animation: blueSweep 0.9s ease-in-out both;
+  animation-delay: calc(1s + var(--i) * 0.12s);
+}
+
+@keyframes letterRise {
+  from {
+    opacity: 0;
+    transform: translateY(45px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blueSweep {
+  0% {
+    background-position: 100% 0;
+    filter: none;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 13px #00BFFF);
+  }
+
+  100% {
+    background-position: 0% 0;
+    filter: none;
+  }
+}
+
+/* HERO DESCRIPTION */
+
+.hero-intro {
+  margin-top: 35px;
+}
+
+.hero-intro h2 {
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(25px, 3.1vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.hero-intro p {
+  max-width: 475px;
+
+  margin-top: 17px;
+
+  font-size: clamp(15px, 1.25vw, 20px);
+  line-height: 1.45;
+  color: #626262;
+}
+
+/* VIEW PROJECTS */
+
+.explore-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+
+  margin-top: 22px;
+  padding: 13px 19px;
+
+  background: var(--blue);
+
+  font-size: clamp(16px, 1.3vw, 21px);
+  font-weight: 800;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.explore-button:hover {
+  transform: translateY(-4px);
+  background: #A7DFFF;
+}
+
+.scroll-arrow {
+  display: inline-block;
+
+  font-size: 29px;
+  line-height: 1;
+
+  animation: arrowBounce 1.1s
+    ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translateY(-4px);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* HERO IMAGE */
+
+.hero-art {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-art img {
+  width: 100%;
+  height: auto;
+
+  animation: heroImageEnter 1.2s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+@keyframes heroImageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(55px) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
+   MAIN PROJECT CONTENT
+========================================= */
+
+.print-projects {
+  width: min(1440px, 92%);
+  margin: 0 auto;
+  padding-bottom: 130px;
+}
+
+.section-label {
+  display: inline-block;
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+/* =========================================
+   01 / BROCHURE
+========================================= */
+
+.brochure-intro {
+  display: grid;
+  grid-template-columns: 74% 26%;
+  align-items: center;
+  gap: 0;
+
+  margin-bottom: 65px;
+}
+
+.brochure-main-image {
+  min-width: 0;
+  justify-self: start;
+  margin-left: -40px;
+}
+
+.brochure-main-image img {
+  width: 108%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+}
+
+.brochure-heading {
+  padding: 20px 12px 20px 35px;
+}
+
+.brochure-heading h2 {
+  margin-top: 20px;
+
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(28px, 3vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.brochure-heading p {
+  max-width: 390px;
+
+  margin-top: 18px;
+
+  font-size: clamp(15px, 1.12vw, 18px);
+  line-height: 1.5;
+  color: #626262;
+}
+
+/* TWO BROCHURE IMAGES */
+
+.brochure-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 30px;
+
+  margin-bottom: 65px;
+}
+
+.showcase-image {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.showcase-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================================
+   THREE STAGES — CLOSE TOGETHER
+========================================= */
+
+.design-stages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  align-items: start;
+
+  width: 100%;
+  margin: 0 auto 105px;
+}
+
+.stage-card {
+  min-width: 0;
+  padding: 14px 10px 16px;
+  background: #F1EDE7;
+}
+
+.stage-heading {
+  min-height: 82px;
+}
+
+.stage-heading h3 {
+  font-family: Georgia, serif;
+  font-size: clamp(17px, 1.55vw, 25px);
+  line-height: 1.2;
+  font-weight: 400;
+
+  color: #4B4038;
+}
+
+.stage-heading p {
+  margin-top: 9px;
+
+  font-size: clamp(12px, 1vw, 16px);
+  color: #625851;
+  line-height: 1.4;
+}
+
+.stage-image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.stage-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* STAGGERED REVEAL */
+
+.stage-card:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.stage-card:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+/* =========================================
+   02 / RESTAURANT MENU
+========================================= */
+
+.restaurant-section {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  align-items: center;
+
+  gap: 0;
+  margin-top: 25px;
+}
+
+.restaurant-copy {
+  padding: 0 28px 0 5px;
+}
+
+.restaurant-copy h2 {
+  margin-top: 22px;
+
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(27px, 3vw, 47px);
+
+  line-height: 1.04;
+  letter-spacing: -0.06em;
+}
+
+.restaurant-copy p {
+  max-width: 370px;
+
+  margin-top: 20px;
+
+  font-size: clamp(15px, 1.15vw, 19px);
+  line-height: 1.5;
+  color: #626262;
+}
+
+.restaurant-image {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 35px;
+}
+
+.restaurant-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================================
+   SCROLL REVEAL ANIMATION
+========================================= */
+
+.reveal {
+  opacity: 0;
+
+  transform: translateY(60px) scale(0.97);
+
+  transition:
+    opacity 0.95s ease,
+    transform 0.95s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.brochure-showcase .reveal:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+/* =========================================
+   NEON STARS
+========================================= */
+
+.page-stars {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+
+  font-family: Arial, sans-serif;
+  font-size: 29px;
+
+  line-height: 1;
+  color: #26CFFF;
+
+  text-shadow:
+    0 0 6px #FFFFFF,
+    0 0 15px rgba(0, 191, 255, 0.85),
+    0 0 29px rgba(0, 191, 255, 0.45);
+
+  animation:
+    starFloat 4.6s ease-in-out infinite,
+    starPulse 2.2s ease-in-out infinite;
+}
+
+.s1 { top: 18%; left: 2%; font-size: 36px; }
+.s2 { top: 34%; right: 2%; font-size: 29px;
+      animation-delay: -1s; }
+.s3 { top: 54%; left: 3%; font-size: 22px;
+      animation-delay: -2s; }
+.s4 { top: 72%; right: 3%; font-size: 33px;
+      animation-delay: -1.6s; }
+.s5 { top: 42%; left: 8%; font-size: 17px;
+      animation-delay: -3s; }
+.s6 { top: 13%; right: 10%; font-size: 19px;
+      animation-delay: -2.5s; }
+.s7 { bottom: 12%; left: 5%; font-size: 29px;
+      animation-delay: -0.8s; }
+.s8 { bottom: 9%; right: 9%; font-size: 18px;
+      animation-delay: -3.5s; }
+
+@keyframes starFloat {
+  0%, 100% {
+    transform:
+      translateY(0) rotate(0deg) scale(0.9);
+  }
+
+  50% {
+    transform:
+      translateY(-16px) rotate(13deg) scale(1.15);
+  }
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    opacity: 0.4;
+    filter: brightness(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.4);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+  .site-brand {
+    font-size: 11px;
+  }
+
+  .site-nav {
+    gap: 11px;
+  }
+
+  .site-nav a {
+    font-size: 10px;
+  }
+
+  .print-hero {
+    min-height: 330px;
+  }
+
+  .print-title {
+    font-size: 10vw;
+  }
+
+  .hero-intro h2 {
+    font-size: 2.8vw;
+  }
+
+  .brochure-intro {
+    grid-template-columns: 62% 38%;
+  }
+
+  .brochure-heading {
+    padding-left: 20px;
+  }
+
+  .brochure-heading h2 {
+    font-size: 2.9vw;
+  }
+
+  .restaurant-section {
+    grid-template-columns: 33% 67%;
+  }
+
+  .restaurant-copy h2 {
+    font-size: 2.9vw;
+  }
+
+  .stage-card {
+    padding: 12px 6px;
+  }
+
+  .stage-heading {
+    min-height: 88px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+  .site-header {
+    min-height: 60px;
+    padding: 14px 16px;
+  }
+
+  .site-brand {
+    max-width: 75%;
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 5px;
+    width: 38px;
+    height: 36px;
+
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    width: 27px;
+    height: 2px;
+    background: #050505;
+  }
+
+  .site-nav {
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 22px;
+    padding: 25px 20px 30px;
+
+    background: var(--blue);
+  }
+
+  .site-nav.open {
+    display: flex;
+  }
+
+  .site-nav a {
+    font-size: 15px;
+  }
+
+  /* HERO MOBILE */
+
+  .print-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 94%;
+    min-height: 0;
+
+    padding: 18px 0 30px;
+  }
+
+  .hero-copy {
+    padding-left: 2%;
+  }
+
+  .print-title {
+    font-size: clamp(73px, 19vw, 130px);
+  }
+
+  .hero-intro {
+    margin-top: 26px;
+  }
+
+  .hero-intro h2 {
+    font-size: clamp(25px, 6vw, 38px);
+  }
+
+  .hero-intro p {
+    font-size: 15px;
+  }
+
+  .explore-button {
+    gap: 24px;
+    padding: 11px 15px;
+    font-size: 15px;
+  }
+
+  .scroll-arrow {
+    font-size: 25px;
+  }
+
+  .hero-art {
+    margin-top: 15px;
+  }
+
+  /* CONTENT MOBILE */
+
+  .print-projects {
+    width: 92%;
+    padding-bottom: 70px;
+  }
+
+  .brochure-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+
+    margin-bottom: 45px;
+  }
+
+  .brochure-heading {
+    padding: 0;
+  }
+
+  .brochure-heading h2 {
+    font-size: clamp(28px, 6vw, 40px);
+  }
+
+  .brochure-heading p {
+    font-size: 15px;
+  }
+
+  .brochure-showcase {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 55px;
+  }
+
+  .showcase-image {
+    border-radius: 17px;
+  }
+
+  /* KEEP ALL THREE STAGES TOGETHER */
+
+  .design-stages {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3px;
+
+    margin-bottom: 65px;
+  }
+
+  .stage-card {
+    padding: 8px 4px 10px;
+  }
+
+  .stage-heading {
+    min-height: 74px;
+  }
+
+  .stage-heading h3 {
+    font-size: clamp(9px, 2.3vw, 15px);
+    line-height: 1.2;
+  }
+
+  .stage-heading p {
+    margin-top: 5px;
+    font-size: clamp(8px, 1.9vw, 12px);
+  }
+
+  /* RESTAURANT MOBILE */
+
+  .restaurant-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .restaurant-copy {
+    padding: 0;
+  }
+
+  .restaurant-copy h2 {
+    font-size: clamp(30px, 7vw, 48px);
+  }
+
+  .restaurant-copy p {
+    font-size: 15px;
+  }
+
+  .restaurant-image {
+    border-radius: 20px;
+  }
+
+  .star {
+    font-size: 19px;
+  }
+
+  .s5, .s6, .s7, .s8 {
+    display: none;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .title-letter,
+  .title-letter::after,
+  .hero-art img,
+  .scroll-arrow,
+  .star {
+    animation: none;
+  }
+
+  .title-letter {
+    opacity: 1;
+    transform: none;
+  }
+
+  .title-letter::after {
+    display: none;
+  }
+
+  .reveal,
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* BLUE NEON TITLE OUTLINE */
+
+.title-letter {
+  -webkit-text-stroke: 1.2px #19BFFF;
+
+  filter:
+    drop-shadow(0 0 3px rgba(0, 191, 255, 0.45))
+    drop-shadow(0 0 8px rgba(0, 191, 255, 0.22));
+}
