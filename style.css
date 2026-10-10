@@ -1787,11 +1787,32 @@ svg {
 }
 
 
-/* DESKTOP — FINAL DESIGNER SIZE */
+
+/* DESKTOP — FINAL COMPOSITION */
 
 @media (min-width: 1200px) {
-  main.hero h1.designer-title {
-    font-size: 11vw !important;
+
+  /* Make DESIGNER slightly larger */
+  main.hero .designer-title {
+    font-size: 11.5vw !important;
     top: 0 !important;
+    transform: none !important;
   }
+
+  /* Keep laptop and folders below title */
+  main.hero .hero-stage {
+    top: 56% !important;
+
+    width: min(
+      76vw,
+      1100px,
+      calc((100svh - 260px) * 1.58)
+    ) !important;
+  }
+
+  /* Keep software icons at bottom */
+  main.hero .software-strip {
+    bottom: 10px !important;
+  }
+
 }
