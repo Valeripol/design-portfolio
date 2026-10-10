@@ -1775,3 +1775,13 @@ svg {
     transform: translateY(-45px);
   }
 }
+
+/* =========================================
+   DESKTOP — MOVE DESIGNER TITLE UP
+========================================= */
+
+@media (min-width: 1024px) {
+  .designer-title {
+    transform: translateY(-45px);
+  }
+}
